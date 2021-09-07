@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SibersTest.Models.Projectss>
+
+@{
+    ViewBag.Title = "Список проектов";
+}
+
+<h2>Проекты</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый проект", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Имя проекта
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>Текущие проекты в базе данных </h3> <br />
+ <h2>Для поиска выберите критерий,введите значение в поле и нажмите кнопку. Для сортировки нажмите на соответствущий столбец </h2>
+<input id="searchbox" />
+
+    <select id="selectbar" class="form-select" aria-label="Default select example">
+        <option value="0" selected=selected>Выберите критерий поиска</option>
+        <option value="1">По сотрудникам</option>
+        <option value="2">По приоритетам</option>
+        <option value="3">По проектам</option>
+    </select>
+
+ <button onclick="SearchButton()" class="btn btn-dark" id="Button1">Поиск</button>
+ <button onclick="LoadTable()" class="btn btn-dark">Вернуть исходную таблицу</button>
+<table id="projectstable" width="300" border="1" class="table">
+    <thead>
+        <tr>
+
+            <td>Проект</td>
+            <td>Сотрудник</td>
+            <td>Дата начала</td>
+            <td>Дата окончания</td>
+            <td>Приоритет</td>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @{
+            foreach (var film in ViewBag.Projects)
+            {
+                <tr>
+                    <td>@film.ProjectId</td>
+                    <td>@film.EmployeeId</td>
+                    <td>@film.ProjectDateStart</td>
+                    <td>@film.ProjectDateEnd</td>
+                    <td>@film.ProjectPriorityId</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+<link href="~/Content/tablesort.css" rel="stylesheet" />
+<script src="~/Scripts/tablesort.min.js"></script>
+<script src="~/Scripts/tablesort.number.min.js"></script>
+<script src="~/Scripts/tablesort.date.min.js"></script>
+<script>
+
+
+    var projectsarray = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.List))
+    console.log(projectsarray);
+    var table = document.getElementById("projectstable");
+    new Tablesort(document.getElementById('projectstable'));
+
+
+    function SearchButton() {
+    var selectbar = document.getElementById("selectbar").value;
+    var searchbox = document.getElementById("searchbox").value;
+    var selectedprojects;
+
+
+    if (selectbar == 0 || searchbox == "") { alert("Вы не выбрали критерий поиска или строка пустая"); return 0; }
+    switch (selectbar) {
+        case '1': { selectedprojects = projectsarray.filter(e => e.EmployeeId == searchbox); break; }
+        case '2': { selectedprojects = projectsarray.filter(e => e.ProjectPriorityId == searchbox); break; }
+        case '3': { selectedprojects = projectsarray.filter(e => e.ProjectId == searchbox); break; }
+        default: alert("Ошибка");
+        }
+        
+
+
+    var table = document.getElementById("tbody");
+    tbody.innerHTML = "";
+
+
+    var template = ""; var count = selectedprojects.length;
+    for (var i in selectedprojects)
+        template += "<tr> <td>" +
+            selectedprojects[i].ProjectId + "</td> <td>"
+            + selectedprojects[i].EmployeeId + "</td> <td>"
+            + selectedprojects[i].ProjectDateStart + "</td> <td>"
+            + selectedprojects[i].ProjectDateEnd + "</td> <td>"
+            + selectedprojects[i].ProjectPriorityId + "</td> </tr>";
+
+        
+
+    table.innerHTML += template;
+    alert("Найдено " + count + " записей в таблице");
+    }
+
+    function LoadTable() {
+
+        var table = document.getElementById("tbody");
+        tbody.innerHTML = "";
+        var template = "";
+        for (var i in projectsarray)
+            template += "<tr> <td>" +
+                projectsarray[i].ProjectId + "</td> <td>"
+                + projectsarray[i].EmployeeId + "</td> <td>"
+                + projectsarray[i].ProjectDateStart + "</td> <td>"
+                + projectsarray[i].ProjectDateEnd + "</td> <td>"
+                + projectsarray[i].ProjectPriorityId + "</td> </tr>";
+
+        table.innerHTML += template;
+    }
+
+</script>

@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ProjectsDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecondName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Leaders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaderName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecondName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyPerformerName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Priorities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Priority" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectDates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectPerformers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProjectsDB.dbo.ProjectsInfo" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProjectsInfo">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="ProjectDateStart" />
+            <PropertyRef Name="ProjectDateEnd" />
+            <PropertyRef Name="ProjectPriorityId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ProjectDateStart" Type="datetime" Nullable="false" />
+          <Property Name="ProjectDateEnd" Type="datetime" Nullable="false" />
+          <Property Name="ProjectPriorityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectsInfoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ProjectDateStart" Type="datetime" Nullable="false" />
+          <Property Name="ProjectDateEnd" Type="datetime" Nullable="false" />
+          <Property Name="ProjectPriorityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectsPriorities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="ProjectPriority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projectss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projectsses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ProjectsPriorities_Priorities">
+          <End Role="Priorities" Type="Self.Priorities" Multiplicity="1" />
+          <End Role="ProjectsPriorities" Type="Self.ProjectsPriorities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priorities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectsPriorities">
+              <PropertyRef Name="ProjectPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectsPriorities_Projectss">
+          <End Role="Projectss" Type="Self.Projectss" Multiplicity="1" />
+          <End Role="ProjectsPriorities" Type="Self.ProjectsPriorities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projectss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectsPriorities">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ProjectsDBModelContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leaders" EntityType="Self.Leaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performers" EntityType="Self.Performers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priorities" EntityType="Self.Priorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectDates" EntityType="Self.ProjectDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectPerformers" EntityType="Self.ProjectPerformers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectsInfoes" EntityType="Self.ProjectsInfoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectsPriorities" EntityType="Self.ProjectsPriorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projectss" EntityType="Self.Projectss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projectsses" EntityType="Self.Projectsses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectsInfo" EntityType="Self.ProjectsInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProjectsInfo].[id] AS [id], 
+    [ProjectsInfo].[ProjectId] AS [ProjectId], 
+    [ProjectsInfo].[EmployeeId] AS [EmployeeId], 
+    [ProjectsInfo].[ProjectDateStart] AS [ProjectDateStart], 
+    [ProjectsInfo].[ProjectDateEnd] AS [ProjectDateEnd], 
+    [ProjectsInfo].[ProjectPriorityId] AS [ProjectPriorityId]
+    FROM [dbo].[ProjectsInfo] AS [ProjectsInfo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ProjectsPriorities_Priorities" Association="Self.FK_ProjectsPriorities_Priorities">
+            <End Role="Priorities" EntitySet="Priorities" />
+            <End Role="ProjectsPriorities" EntitySet="ProjectsPriorities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsPriorities_Projectss" Association="Self.FK_ProjectsPriorities_Projectss">
+            <End Role="Projectss" EntitySet="Projectss" />
+            <End Role="ProjectsPriorities" EntitySet="ProjectsPriorities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Leaders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyPerformerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Priorities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Priority" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProjectsPriorities" Relationship="Self.FK_ProjectsPriorities_Priorities" FromRole="Priorities" ToRole="ProjectsPriorities" />
+        </EntityType>
+        <EntityType Name="ProjectDates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="ProjectPerformers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectsInfoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectDateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectDateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectPriorityId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectsPriorities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Priorities" Relationship="Self.FK_ProjectsPriorities_Priorities" FromRole="ProjectsPriorities" ToRole="Priorities" />
+          <NavigationProperty Name="Projectss" Relationship="Self.FK_ProjectsPriorities_Projectss" FromRole="ProjectsPriorities" ToRole="Projectss" />
+        </EntityType>
+        <EntityType Name="Projectss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProjectsPriorities" Relationship="Self.FK_ProjectsPriorities_Projectss" FromRole="Projectss" ToRole="ProjectsPriorities" />
+        </EntityType>
+        <EntityType Name="Projectsses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ProjectsInfo">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="ProjectDateStart" />
+            <PropertyRef Name="ProjectDateEnd" />
+            <PropertyRef Name="ProjectPriorityId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectDateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectDateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectPriorityId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProjectsPriorities_Priorities">
+          <End Role="Priorities" Type="Self.Priorities" Multiplicity="1" />
+          <End Role="ProjectsPriorities" Type="Self.ProjectsPriorities" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ProjectsPriorities_Projectss">
+          <End Role="Projectss" Type="Self.Projectss" Multiplicity="1" />
+          <End Role="ProjectsPriorities" Type="Self.ProjectsPriorities" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProjectsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Leaders" EntityType="Self.Leaders" />
+          <EntitySet Name="Performers" EntityType="Self.Performers" />
+          <EntitySet Name="Priorities" EntityType="Self.Priorities" />
+          <EntitySet Name="ProjectDates" EntityType="Self.ProjectDates" />
+          <EntitySet Name="ProjectPerformers" EntityType="Self.ProjectPerformers" />
+          <EntitySet Name="ProjectsInfoes" EntityType="Self.ProjectsInfoes" />
+          <EntitySet Name="ProjectsPriorities" EntityType="Self.ProjectsPriorities" />
+          <EntitySet Name="Projectss" EntityType="Self.Projectss" />
+          <EntitySet Name="Projectsses" EntityType="Self.Projectsses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="ProjectsInfo" EntityType="Self.ProjectsInfo" />
+          <AssociationSet Name="FK_ProjectsPriorities_Priorities" Association="Self.FK_ProjectsPriorities_Priorities">
+            <End Role="Priorities" EntitySet="Priorities" />
+            <End Role="ProjectsPriorities" EntitySet="ProjectsPriorities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsPriorities_Projectss" Association="Self.FK_ProjectsPriorities_Projectss">
+            <End Role="Projectss" EntitySet="Projectss" />
+            <End Role="ProjectsPriorities" EntitySet="ProjectsPriorities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProjectsDBModelContainer" CdmEntityContainer="ProjectsDBEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ProjectsDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Companies">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaders">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Leaders">
+              <MappingFragment StoreEntitySet="Leaders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="LeaderName" ColumnName="LeaderName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performers">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Performers">
+              <MappingFragment StoreEntitySet="Performers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CompanyPerformerName" ColumnName="CompanyPerformerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Priorities">
+              <MappingFragment StoreEntitySet="Priorities">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectDates">
+            <EntityTypeMapping TypeName="ProjectsDBModel.ProjectDates">
+              <MappingFragment StoreEntitySet="ProjectDates">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectPerformers">
+            <EntityTypeMapping TypeName="ProjectsDBModel.ProjectPerformers">
+              <MappingFragment StoreEntitySet="ProjectPerformers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsInfoes">
+            <EntityTypeMapping TypeName="ProjectsDBModel.ProjectsInfoes">
+              <MappingFragment StoreEntitySet="ProjectsInfoes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ProjectDateStart" ColumnName="ProjectDateStart" />
+                <ScalarProperty Name="ProjectDateEnd" ColumnName="ProjectDateEnd" />
+                <ScalarProperty Name="ProjectPriorityId" ColumnName="ProjectPriorityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsPriorities">
+            <EntityTypeMapping TypeName="ProjectsDBModel.ProjectsPriorities">
+              <MappingFragment StoreEntitySet="ProjectsPriorities">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projectss">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Projectss">
+              <MappingFragment StoreEntitySet="Projectss">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projectsses">
+            <EntityTypeMapping TypeName="ProjectsDBModel.Projectsses">
+              <MappingFragment StoreEntitySet="Projectsses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectsDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsInfo">
+            <EntityTypeMapping TypeName="ProjectsDBModel.ProjectsInfo">
+              <MappingFragment StoreEntitySet="ProjectsInfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ProjectDateStart" ColumnName="ProjectDateStart" />
+                <ScalarProperty Name="ProjectDateEnd" ColumnName="ProjectDateEnd" />
+                <ScalarProperty Name="ProjectPriorityId" ColumnName="ProjectPriorityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_ProjectsPriorities_Priorities" TypeName="ProjectsDBModel.FK_ProjectsPriorities_Priorities" StoreEntitySet="ProjectsPriorities">
+            <EndProperty Name="Priorities">
+              <ScalarProperty Name="id" ColumnName="ProjectPriority" />
+            </EndProperty>
+            <EndProperty Name="ProjectsPriorities">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ProjectsPriorities_Projectss" TypeName="ProjectsDBModel.FK_ProjectsPriorities_Projectss" StoreEntitySet="ProjectsPriorities">
+            <EndProperty Name="Projectss">
+              <ScalarProperty Name="id" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="ProjectsPriorities">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

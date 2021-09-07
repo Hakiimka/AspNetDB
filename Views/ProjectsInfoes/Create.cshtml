@@ -1,0 +1,112 @@
+﻿@model SibersTest.Models.ProjectsInfoes
+
+@{
+    ViewBag.Title = "Добавить информацию о проекте";
+}
+
+<h2>Создать</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Регистрация сотрудника на проекте</h2>
+        <h4>Заполните поля спомощью соответствующих списков</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectId, new { htmlAttributes = new { @class = "form-control", id = "ProjectID"  } })
+                @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { @class = "form-control", id = "EmployeeID"  } })
+                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectDateStart, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectDateStart, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.ProjectDateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectDateEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectDateEnd, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.ProjectDateEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectPriorityId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectPriorityId, new { htmlAttributes = new { @class = "form-control", id = "PriorityID"} })
+                @Html.ValidationMessageFor(model => model.ProjectPriorityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+ @Html.DropDownList("Projects", ViewBag.projects as SelectList, new { id = "ProjectsList", @class = "form-control" })
+ <button class="btn btn-default" onclick="ConfirmPRJSelect()">Выбрать проект</button>
+
+ @Html.DropDownList("Employees", ViewBag.employees as SelectList, new { id = "EmployeesList", @class = "form-control" })
+ <button class="btn btn-default" onclick="ConfirmEMPSelect()">Выбрать сотрудника</button>
+
+
+@Html.DropDownList("Priorities", ViewBag.priorities as SelectList, new { id = "PrioritiesList", @class = "form-control" })
+<button class="btn btn-default" onclick="ConfirmPRTSelect()">Выбрать приоритет</button>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    var employeeid = document.getElementById("EmployeeID");
+    var employeeselect;
+
+    var projectid = document.getElementById("ProjectID");
+    var projectselect;
+
+    var priorityid = document.getElementById("PriorityID");
+    var priorityselect;
+
+    function ConfirmPRTSelect() {
+        priorityselect = document.getElementById("PrioritiesList").value;
+        priorityid.value = priorityselect;
+    }
+
+    function ConfirmPRJSelect() {
+        projectselect = document.getElementById("ProjectsList").value;
+        projectid.value = projectselect;
+    }
+
+    function ConfirmEMPSelect() {
+        employeeselect = document.getElementById("EmployeesList").value;
+        employeeid.value = employeeselect;
+    }
+
+</script>
